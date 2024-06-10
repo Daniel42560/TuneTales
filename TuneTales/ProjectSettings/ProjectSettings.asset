@@ -810,12 +810,12 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
-  cloudProjectId: 
+  activeInputHandler: 1
+  cloudProjectId: 79c72e12-5d1f-4292-9385-3ec614aaee33
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: TuneTales 2024-06-10_20-50-20
+  organizationId: th3o_o
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
