@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //- ToDo: 
 
-    // Update is called once per frame
-    void Update()
+    //- Debug
+    public AudioSource Audio;
+
+    protected override void Start()
     {
-        
+        base.Start();
+
     }
 }
