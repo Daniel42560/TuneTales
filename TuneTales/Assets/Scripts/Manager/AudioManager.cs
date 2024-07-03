@@ -6,7 +6,8 @@ using UnityEngine;
 public class AudioManager : Singleton<AudioManager>
 {
     public Note[,] Notes;
-    public AudioClip[] Clips = new AudioClip[96];
+    public AudioClip[] SynthClips = new AudioClip[96];
+    public AudioClip[] PianoClips = new AudioClip[96];
     public AudioSource NoteSource, MusicSource;
 
     public AudioClip DebugClip;
@@ -31,7 +32,7 @@ public class AudioManager : Singleton<AudioManager>
         //    NoteSource.Play();
         //}
     }
-    public void PlayNote(NoteSymbol symbol, int octave)
+    public void PlayNote(NoteSymbol symbol, int octave, Instrument instrument)
     {
         if (octave <= 0)
         {
@@ -44,8 +45,8 @@ public class AudioManager : Singleton<AudioManager>
             Debug.Log("Clip is null");
         else
         {
-            NoteSource.clip = note.Clip;
-            NoteSource.loop = true;
+            NoteSource.clip = note.Clip[(int)instrument];
+            NoteSource.loop = false;
             NoteSource.Play();
         }
     }
@@ -56,7 +57,11 @@ public class AudioManager : Singleton<AudioManager>
         {
             for (int j = 0; j < Notes.GetLength(1); j++)
             {
-                Notes[i, j] = new Note((NoteSymbol)j, i, Clips[i * 12 + j]);
+                AudioClip[] sounds = new AudioClip[Enum.GetNames(typeof(Instrument)).Length];
+                //- Hier manuell Instrumente hinzufügen
+                sounds[0] = SynthClips[i * 12 + j];
+                sounds[1] = PianoClips[i * 12 + j];
+                Notes[i, j] = new Note((NoteSymbol)j, i, sounds);
             }
         }
     }

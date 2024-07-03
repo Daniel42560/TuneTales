@@ -38,10 +38,13 @@ public class PlayerController : MonoBehaviour
 
         IsMoving = MoveInput != Vector2.zero;
     }
-    public void OnFire(InputAction.CallbackContext context)
+    public void OnRangedAttack(InputAction.CallbackContext context)
     {
-        AudioManager.Instance.PlayNote(NoteSymbol.C, 4);
-        Debug.Log("Fire");
+        if (context.started)
+        {
+            AudioManager.Instance.PlayNote(NoteSymbol.C, 4, Instrument.Piano);
+            GetComponent<ProjectileLauncher>().FireProjectile();
+        }
     }
     #endregion
 }
