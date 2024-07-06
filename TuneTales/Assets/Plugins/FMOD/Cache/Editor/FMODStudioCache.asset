@@ -1,0 +1,280 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9026311717202838101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Notes/Piano/Long/long_g_4
+  m_EditorClassIdentifier: 
+  Path: event:/Notes/Piano/Long/long_g_4
+  Guid:
+    Data1: 747265902
+    Data2: 1159084825
+    Data3: -249647481
+    Data4: 2055183966
+  Banks:
+  - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3500
+--- !u!114 &-6596739647054611211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Notes/Piano/Short/short_c_4
+  m_EditorClassIdentifier: 
+  Path: event:/Notes/Piano/Short/short_c_4
+  Guid:
+    Data1: 908609655
+    Data2: 1183977049
+    Data3: -1087750742
+    Data4: 453796070
+  Banks:
+  - {fileID: 8890421103761558811}
+  - {fileID: 7834822988703012102}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
+--- !u!114 &-2181247565088890107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Level1/Background
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Level1/Background
+  Guid:
+    Data1: -1106460471
+    Data2: 1204045888
+    Data3: -2075143775
+    Data4: 13853892
+  Banks:
+  - {fileID: 6365033500065533331}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12000
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 9002635945980516409}
+  - {fileID: 8890421103761558811}
+  - {fileID: 7834822988703012102}
+  - {fileID: 6365033500065533331}
+  EditorEvents:
+  - {fileID: -6596739647054611211}
+  - {fileID: 7833062635183061728}
+  - {fileID: 7579983418733927032}
+  - {fileID: 3101472746958500858}
+  - {fileID: -9026311717202838101}
+  - {fileID: -2181247565088890107}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 8890421103761558811}
+  StringsBanks:
+  - {fileID: 9002635945980516409}
+  cacheTime: 638558902803582242
+  cacheVersion: 131618
+--- !u!114 &3101472746958500858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Notes/Piano/Long/long_a_4
+  m_EditorClassIdentifier: 
+  Path: event:/Notes/Piano/Long/long_a_4
+  Guid:
+    Data1: -2075199433
+    Data2: 1246452899
+    Data3: -96143427
+    Data4: 960615380
+  Banks:
+  - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3500
+--- !u!114 &6365033500065533331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638558902803582242
+  FileSizes:
+  - Name: Desktop
+    Value: 187136
+  Exists: 1
+--- !u!114 &7579983418733927032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Notes/Piano/Long/long_f_4
+  m_EditorClassIdentifier: 
+  Path: event:/Notes/Piano/Long/long_f_4
+  Guid:
+    Data1: -620136695
+    Data2: 1143603597
+    Data3: 437464961
+    Data4: -205755916
+  Banks:
+  - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3500
+--- !u!114 &7833062635183061728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Notes/Piano/Long/long_c_4
+  m_EditorClassIdentifier: 
+  Path: event:/Notes/Piano/Long/long_c_4
+  Guid:
+    Data1: 1209189444
+    Data2: 1135511602
+    Data3: 900499122
+    Data4: -215957491
+  Banks:
+  - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
+--- !u!114 &7834822988703012102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Notes.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Notes.bank
+  Name: Notes
+  StudioPath: bank:/Notes
+  lastModified: 638558902803368607
+  FileSizes:
+  - Name: Desktop
+    Value: 186272
+  Exists: 1
+--- !u!114 &8890421103761558811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638558902801415240
+  FileSizes:
+  - Name: Desktop
+    Value: 63744
+  Exists: 1
+--- !u!114 &9002635945980516409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638558902801425239
+  FileSizes:
+  - Name: Desktop
+    Value: 1108
+  Exists: 1

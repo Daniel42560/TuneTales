@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-            AudioManager.Instance.PlayNote(NoteSymbol.C, 4, Instrument.Piano);
+            //AudioManager.Instance.PlayNote(NoteSymbol.C, 4, Instrument.Piano);
             GetComponent<ProjectileLauncher>().FireProjectile();
         }
     }
