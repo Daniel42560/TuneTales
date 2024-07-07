@@ -19,8 +19,8 @@ MonoBehaviour:
     Data3: -249647481
     Data4: 2055183966
   Banks:
-  - {fileID: 6365033500065533331}
   - {fileID: 7834822988703012102}
+  - {fileID: 6365033500065533331}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -47,8 +47,8 @@ MonoBehaviour:
     Data3: -1087750742
     Data4: 453796070
   Banks:
-  - {fileID: 8890421103761558811}
   - {fileID: 7834822988703012102}
+  - {fileID: 8890421103761558811}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -100,6 +100,7 @@ MonoBehaviour:
   - {fileID: 8890421103761558811}
   - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 927989793730363730}
   EditorEvents:
   - {fileID: -6596739647054611211}
   - {fileID: 7833062635183061728}
@@ -107,13 +108,88 @@ MonoBehaviour:
   - {fileID: 3101472746958500858}
   - {fileID: -9026311717202838101}
   - {fileID: -2181247565088890107}
-  EditorParameters: []
+  - {fileID: 1257302635945768529}
+  EditorParameters:
+  - {fileID: 803536765511832395}
   MasterBanks:
   - {fileID: 8890421103761558811}
   StringsBanks:
   - {fileID: 9002635945980516409}
-  cacheTime: 638558902803582242
+  cacheTime: 638559534105057580
   cacheVersion: 131618
+--- !u!114 &803536765511832395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TestParameter
+  m_EditorClassIdentifier: 
+  Name: TestParameter
+  StudioPath: parameter:/TestParameter
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 704319929
+    data2: 457136154
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Value A
+  - Value B
+  Exists: 1
+--- !u!114 &927989793730363730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Test.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Test.bank
+  Name: Test
+  StudioPath: bank:/Test
+  lastModified: 638559534105057580
+  FileSizes:
+  - Name: Desktop
+    Value: 506912
+  Exists: 1
+--- !u!114 &1257302635945768529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ProgrammerEvent
+  m_EditorClassIdentifier: 
+  Path: event:/ProgrammerEvent
+  Guid:
+    Data1: 1351025706
+    Data2: 1114015955
+    Data3: -1121858149
+    Data4: -1055201527
+  Banks:
+  - {fileID: 927989793730363730}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &3101472746958500858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,8 +209,8 @@ MonoBehaviour:
     Data3: -96143427
     Data4: 960615380
   Banks:
-  - {fileID: 6365033500065533331}
   - {fileID: 7834822988703012102}
+  - {fileID: 6365033500065533331}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -157,10 +233,10 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638558902803582242
+  lastModified: 638559534100224015
   FileSizes:
   - Name: Desktop
-    Value: 187136
+    Value: 187520
   Exists: 1
 --- !u!114 &7579983418733927032
 MonoBehaviour:
@@ -181,8 +257,8 @@ MonoBehaviour:
     Data3: 437464961
     Data4: -205755916
   Banks:
-  - {fileID: 6365033500065533331}
   - {fileID: 7834822988703012102}
+  - {fileID: 6365033500065533331}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -209,8 +285,8 @@ MonoBehaviour:
     Data3: 900499122
     Data4: -215957491
   Banks:
-  - {fileID: 6365033500065533331}
   - {fileID: 7834822988703012102}
+  - {fileID: 6365033500065533331}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -253,10 +329,10 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638558902801415240
+  lastModified: 638559534099968450
   FileSizes:
   - Name: Desktop
-    Value: 63744
+    Value: 63936
   Exists: 1
 --- !u!114 &9002635945980516409
 MonoBehaviour:
@@ -273,8 +349,8 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638558902801425239
+  lastModified: 638559534099993462
   FileSizes:
   - Name: Desktop
-    Value: 1108
+    Value: 1244
   Exists: 1
