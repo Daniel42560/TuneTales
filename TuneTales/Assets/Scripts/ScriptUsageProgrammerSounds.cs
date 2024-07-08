@@ -6,12 +6,12 @@ using FMODUnity;
 using FMOD.Studio;
 using FMOD;
 
-class ScriptUsageProgrammerSounds : MonoBehaviour
+class ScriptUsageProgrammerSounds : MonoBehaviour, IDisposable
 {
-    private EVENT_CALLBACK dialogueCallback;
+    private EVENT_CALLBACK DialogueCallback;
     public FMODUnity.EventReference EventName;
 
-    private Dictionary<string, EventInstance> _loadedInstances = new();
+    private Dictionary<string, EventInstance> LoadedInstances = new();
 
     public struct SoundAndInfo
     {
@@ -30,12 +30,12 @@ class ScriptUsageProgrammerSounds : MonoBehaviour
     {
         // Explicitly create the delegate object and assign it to a member so it doesn't get freed
         // by the garbage collected while it's being used
-        dialogueCallback = DialogueEventCallback;
+        DialogueCallback = DialogueEventCallback;
         LoadSound(EventName, "A4_piano");
     }
     public void LoadSound(EventReference eventReference, string key)
     {
-        if (_loadedInstances.ContainsKey(key)) return;
+        if (LoadedInstances.ContainsKey(key)) return;
 
         // First get the sound info for this key.
         SOUND_INFO dialogueSoundInfo;
@@ -78,25 +78,25 @@ class ScriptUsageProgrammerSounds : MonoBehaviour
         var dialogueInstance = RuntimeManager.CreateInstance(eventReference);
         dialogueInstance.setUserData(GCHandle.ToIntPtr(soundInfoHandle));
         // Set the callback.
-        dialogueInstance.setCallback(dialogueCallback);
+        dialogueInstance.setCallback(DialogueCallback);
         // Store the EventInstance for when we're going to play the file.
-        _loadedInstances.Add(key, dialogueInstance);
+        LoadedInstances.Add(key, dialogueInstance);
     }
     public void Dispose()
     {
         // Don't forget to release the saved instances. The sounds themselves will be destroyed with the callback.
-        foreach (var inst in _loadedInstances.Values)
+        foreach (var inst in LoadedInstances.Values)
         {
             inst.release();
         }
 
-        _loadedInstances.Clear();
+        LoadedInstances.Clear();
     }
 
     void PlayDialogue(string key)
     {
         // When we want to play, we'll just find the event instance again and start it.
-        var inst = _loadedInstances[key];
+        var inst = LoadedInstances[key];
         inst.start();
     }
 
