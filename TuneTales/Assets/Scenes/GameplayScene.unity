@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 35740938}
   - component: {fileID: 35740939}
+  - component: {fileID: 35740940}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -153,6 +154,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 716146827}
+  - {fileID: 395406410}
   m_Father: {fileID: 1237341503}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -168,7 +170,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894b62e8dd018e84b8508553eb36b187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventName:
+  TestEventReference:
+    Guid:
+      Data1: 1351025706
+      Data2: 1114015955
+      Data3: -1121858149
+      Data4: -1055201527
+    Path: event:/ProgrammerEvent
+--- !u!114 &35740940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35740937}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418d0eb5e14227e48b081829f8acde55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiProgrammerSoundEvent:
     Guid:
       Data1: 1351025706
       Data2: 1114015955
@@ -243,6 +264,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &395406409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395406410}
+  - component: {fileID: 395406411}
+  m_Layer: 0
+  m_Name: FMOD Bank Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &395406410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395406409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 35740938}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &395406411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395406409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9468c5f457ace64f8d4df6d642b107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadEvent: 1
+  UnloadEvent: 2
+  Banks:
+  - Music
+  - Master.strings
+  - Master
+  - Notes
+  - Test
+  CollisionTag: 
+  PreloadSamples: 0
 --- !u!1 &429047153 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3644067295402131059, guid: 3cfaaf6962b8ddd409309c159252365c, type: 3}
@@ -2737,25 +2812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fb9eb5f1025ea46a896309bca57d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1968220245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429047153}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f82f631d09b29d4d8ff261635dbaefc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EventName:
-    Guid:
-      Data1: 1351025706
-      Data2: 1114015955
-      Data3: -1121858149
-      Data4: -1055201527
-    Path: event:/ProgrammerEvent
 --- !u!1 &1986465040
 GameObject:
   m_ObjectHideFlags: 0

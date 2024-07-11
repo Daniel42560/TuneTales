@@ -5,7 +5,8 @@ using UnityEngine;
 public class Overview 
 {
     /*
-    *ToDo: Programmer Event fixen
-    *Idee: Bei Tastendruck den Callback ändern
+    *ToDo: 
+    *Ideen: 
+    *(done) Bei Tastendruck den Callback ändern
     */
 }

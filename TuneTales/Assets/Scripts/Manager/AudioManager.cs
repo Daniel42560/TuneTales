@@ -9,19 +9,24 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    public FMODUnity.EventReference EventName;
+    //public FMODUnity.EventReference EventName;
 
-    private EVENT_CALLBACK DialogueCallback;
+    private EventInstance CurrentMusicInstance;
+    public EventReference TestEventReference;
+
+    //- Programmer Variables
+    private EVENT_CALLBACK BackgroundMusicCallback;
     private Dictionary<string, EventInstance> LoadedInstances = new();
 
 
     protected override void Start()
     {
         base.Start();
-        DialogueCallback = DialogueEventCallback;
-        InitializeMusic(FMODEvents.Instance.background_music);
-        LoadSound(EventName, "A4_piano");
-        LoadSound(EventName, "E4_piano");
+
+        //- Initialize Background Music
+        BackgroundMusicCallback = BackgroundMusicEventCallback;
+        InitializeMusic(FMODEvents.Instance.background_music, "A4_piano");
+
     }
 
     public void PlayDialogue(string key)
@@ -34,145 +39,104 @@ public class AudioManager : Singleton<AudioManager>
     {
         RuntimeManager.PlayOneShot(sound, world_pos);
     }
-    public EventInstance CreateEventInstance(EventReference event_reference)
+    private void InitializeMusic(EventReference music_reference, string key)
     {
-        return RuntimeManager.CreateInstance(event_reference);        
-    }
-
-    private EventInstance MusicEventInstance;
-    private void InitializeMusic(EventReference music_event_reference)
-    {
-        MusicEventInstance = CreateEventInstance(music_event_reference);
-        MusicEventInstance.start();
+        CurrentMusicInstance = RuntimeManager.CreateInstance(music_reference);
+        GCHandle stringHandle = GCHandle.Alloc(key, GCHandleType.Pinned);
+        CurrentMusicInstance.setUserData(GCHandle.ToIntPtr(stringHandle));
+        CurrentMusicInstance.setCallback(BackgroundMusicCallback);
+        CurrentMusicInstance.start();
+        CurrentMusicInstance.release();
     }
 
     #region Programmer Event Functions
-
-    private struct SoundAndInfo
+    public void AssignSoundToProgrammer(string key)
     {
-        public Sound Sound;
-        public SOUND_INFO SoundInfo;
+        GCHandle stringHandle = GCHandle.Alloc(key, GCHandleType.Pinned);
+        CurrentMusicInstance.setUserData(GCHandle.ToIntPtr(stringHandle));
     }
-    public void LoadSound(EventReference eventReference, string key)
+    public void AssignSoundToProgrammer(EventReference reference, string key)
     {
-        if (LoadedInstances.ContainsKey(key)) return;
-
-        // First get the sound info for this key.
-        SOUND_INFO dialogueSoundInfo;
-        var keyResult = RuntimeManager.StudioSystem.getSoundInfo(key, out dialogueSoundInfo);
-        if (keyResult != RESULT.OK)
-        {
-            UnityEngine.Debug.LogError($"Error when loading {key}: {keyResult}");
-            return;
-        }
-
-        MODE soundMode =
-            MODE.LOOP_NORMAL | // Was set like this in example code. Perhaps should be changed to FMOD_LOOP_OFF
-            MODE.CREATECOMPRESSEDSAMPLE | // This loads the sound compressed into memory (uncompressed if it isn't compressed). FMOD_CREATESTREAM could load directly from file. // FMOD_CREATESAMPLE decompresses on load, optimized for playback
-            MODE.NONBLOCKING; // Don't block the main thread. 
-
-        // Create the sound with the createSound method.
-        Sound dialogueSound;
-        var soundResult = RuntimeManager.CoreSystem.createSound(
-            dialogueSoundInfo.name_or_data,
-            soundMode | dialogueSoundInfo.mode,
-            ref dialogueSoundInfo.exinfo,
-            out dialogueSound);
-
-        if (soundResult != RESULT.OK)
-        {
-            UnityEngine.Debug.LogError($"Trying to load sound with key {key} returned error {soundResult}");
-            return;
-        }
-
-        // We'll create a struct to hold both the Sound itself and SoundInfo data.
-        var soundAndInfo = new SoundAndInfo()
-        {
-            Sound = dialogueSound,
-            SoundInfo = dialogueSoundInfo
-        };
-        // Pin the struct to memory with GCHandle.Alloc
-        GCHandle soundInfoHandle = GCHandle.Alloc(soundAndInfo, GCHandleType.Pinned);
-
-        // Finally create an instance for the Event and set the userdata to point to the struct we just pinned.
-        var dialogueInstance = RuntimeManager.CreateInstance(eventReference);
-        dialogueInstance.setUserData(GCHandle.ToIntPtr(soundInfoHandle));
-        // Set the callback.
-        dialogueInstance.setCallback(DialogueCallback);
-        // Store the EventInstance for when we're going to play the file.
-        LoadedInstances.Add(key, dialogueInstance);
-    }
-    public void Dispose()
-    {
-        // Don't forget to release the saved instances. The sounds themselves will be destroyed with the callback.
-        foreach (var inst in LoadedInstances.Values)
-        {
-            inst.release();
-        }
-
-        LoadedInstances.Clear();
+        EventInstance instance = RuntimeManager.CreateInstance(reference);
+        GCHandle stringHandle2 = GCHandle.Alloc(key, GCHandleType.Pinned);
+        instance.setUserData(GCHandle.ToIntPtr(stringHandle2));
+        instance.setCallback(BackgroundMusicCallback);
     }
 
-    [AOT.MonoPInvokeCallback(typeof(EVENT_CALLBACK))]
-    static RESULT DialogueEventCallback(EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr)
+    [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
+    private static FMOD.RESULT BackgroundMusicEventCallback(EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr)
     {
-        //UnityEngine.Debug.Log("Dialogue Callback with type " + type);
-        try
+        FMOD.Studio.EventInstance instance = new FMOD.Studio.EventInstance(instancePtr);
+        instance.getUserData(out IntPtr stringPtr);
+
+        GCHandle stringHandle = GCHandle.FromIntPtr(stringPtr);
+        String key = stringHandle.Target as String;
+
+        switch (type)
         {
-            // Get the EventInstance from the provided pointer
-            var instance = new EventInstance(instancePtr);
-            instance.getUserData(out IntPtr soundInfoPtr);
-            // Get the pointer to the SoundAndInfo struct from the instance.
-            var soundInfoHandle = GCHandle.FromIntPtr(soundInfoPtr);
-            // Dereference it.
-            var soundInfo = (SoundAndInfo)soundInfoHandle.Target;
-            switch (type)
-            {
-                // This is called before playing the programmer sound.
-                // FMOD expects us to fill the parameterPtr with the sound and soundInfo during this call.
-                case EVENT_CALLBACK_TYPE.CREATE_PROGRAMMER_SOUND:
+
+            case FMOD.Studio.EVENT_CALLBACK_TYPE.CREATE_PROGRAMMER_SOUND:
+                {
+                    FMOD.MODE soundMode = FMOD.MODE.LOOP_NORMAL | FMOD.MODE.CREATECOMPRESSEDSAMPLE | FMOD.MODE.NONBLOCKING;
+                    FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES parameter =
+                        (FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES)Marshal.PtrToStructure(parameterPtr,
+                                                        typeof(FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES));
+
+                    string test = parameter.name;
+                    UnityEngine.Debug.Log(test);
+                    if (key.Contains("."))
                     {
-                        // Get the struct from the callback via the pointer.
-                        var parameter =
-                            (PROGRAMMER_SOUND_PROPERTIES)Marshal.PtrToStructure(parameterPtr,
-                                typeof(PROGRAMMER_SOUND_PROPERTIES));
-                        // Put in the sound and soundInfo
-                        parameter.sound = soundInfo.Sound.handle;
-                        parameter.subsoundIndex = soundInfo.SoundInfo.subsoundindex;
-                        // Put the modified data back where we found it.
-                        Marshal.StructureToPtr(parameter, parameterPtr, false);
-                        break;
+                        FMOD.RESULT soundResult = RuntimeManager.CoreSystem.createSound(Application.streamingAssetsPath + "/" + key, soundMode, out FMOD.Sound uiSound);
+                        if (soundResult == FMOD.RESULT.OK)
+                        {
+                            parameter.sound = uiSound.handle;
+                            parameter.subsoundIndex = -1;
+                            Marshal.StructureToPtr(parameter, parameterPtr, false);
+                        }
                     }
-                // When the event is destroyed
-                case EVENT_CALLBACK_TYPE.DESTROYED:
+                    else
                     {
-                        // Release the sound
-                        soundInfo.Sound.release();
-                        // Free the handle to our info struct
-                        soundInfoHandle.Free();
-                        break;
+
+                        FMOD.RESULT keyResult = RuntimeManager.StudioSystem.getSoundInfo(key, out FMOD.Studio.SOUND_INFO uiSoundInfo);
+                        if (keyResult != FMOD.RESULT.OK)
+                        {
+                            break;
+                        }
+
+                        FMOD.RESULT soundResult = RuntimeManager.CoreSystem.createSound(uiSoundInfo.name_or_data, soundMode | uiSoundInfo.mode, ref uiSoundInfo.exinfo, out FMOD.Sound uiSound);
+                        if (soundResult == FMOD.RESULT.OK)
+                        {
+                            parameter.sound = uiSound.handle;
+                            parameter.subsoundIndex = uiSoundInfo.subsoundindex;
+                            Marshal.StructureToPtr(parameter, parameterPtr, false);
+                        }
                     }
-            }
+                    break;
+                }
+            case FMOD.Studio.EVENT_CALLBACK_TYPE.DESTROY_PROGRAMMER_SOUND:
+                {
+                    FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES parameter =
+                        (FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES)Marshal.PtrToStructure(parameterPtr,
+                                                        typeof(FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES));
+                    FMOD.Sound sound = new FMOD.Sound(parameter.sound);
+                    sound.release();
+                    break;
+                }
+            case FMOD.Studio.EVENT_CALLBACK_TYPE.DESTROYED:
+                {
+                    stringHandle.Free();
+                    break;
+                }
         }
-        catch (Exception e) // Getting exceptions in this callback WILL hang Unity, so we'll use a try/catch block
-        {
-            if (e is ArgumentException || e is InvalidOperationException)
-            {
-                return RESULT.OK;
-            }
-
-            throw e;
-        }
-
-        return RESULT.OK;
+        return FMOD.RESULT.OK;
     }
 
-#if UNITY_EDITOR
-    void Reset()
-    {
-        EventName = FMODUnity.EventReference.Find("event:/ProgrammerEvent");
-    }
-#endif
+//#if UNITY_EDITOR
+//    void Reset()
+//    {
+//        EventName = FMODUnity.EventReference.Find("event:/ProgrammerEvent");
+//    }
+//#endif
 
     #endregion
 
@@ -181,11 +145,11 @@ public class AudioManager : Singleton<AudioManager>
         base.Update();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            PlayDialogue("A4_piano");
+            AssignSoundToProgrammer("a_4_piano");
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PlayDialogue("E4_piano");
+            AssignSoundToProgrammer(TestEventReference, "e_4_piano");
         }
     }
 }
