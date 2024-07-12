@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
@@ -25,7 +26,7 @@ public class AudioManager : Singleton<AudioManager>
 
         //- Initialize Background Music
         BackgroundMusicCallback = BackgroundMusicEventCallback;
-        InitializeMusic(FMODEvents.Instance.background_music, "A4_piano");
+        InitializeMusic(TestEventReference, "d_4");
 
     }
 
@@ -61,7 +62,7 @@ public class AudioManager : Singleton<AudioManager>
         GCHandle stringHandle2 = GCHandle.Alloc(key, GCHandleType.Pinned);
         instance.setUserData(GCHandle.ToIntPtr(stringHandle2));
         instance.setCallback(BackgroundMusicCallback);
-    }
+    }    
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
     private static FMOD.RESULT BackgroundMusicEventCallback(EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr)
@@ -82,8 +83,8 @@ public class AudioManager : Singleton<AudioManager>
                         (FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES)Marshal.PtrToStructure(parameterPtr,
                                                         typeof(FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES));
 
-                    string test = parameter.name;
-                    UnityEngine.Debug.Log(test);
+                    AudioManager.Instance.AssignSoundToProgrammer(Helper.ConvertUtf8ToUtf16(parameter.name));
+
                     if (key.Contains("."))
                     {
                         FMOD.RESULT soundResult = RuntimeManager.CoreSystem.createSound(Application.streamingAssetsPath + "/" + key, soundMode, out FMOD.Sound uiSound);
@@ -96,7 +97,6 @@ public class AudioManager : Singleton<AudioManager>
                     }
                     else
                     {
-
                         FMOD.RESULT keyResult = RuntimeManager.StudioSystem.getSoundInfo(key, out FMOD.Studio.SOUND_INFO uiSoundInfo);
                         if (keyResult != FMOD.RESULT.OK)
                         {
@@ -145,11 +145,11 @@ public class AudioManager : Singleton<AudioManager>
         base.Update();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AssignSoundToProgrammer("a_4_piano");
+            AssignSoundToProgrammer("a_4");
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            AssignSoundToProgrammer(TestEventReference, "e_4_piano");
+            AssignSoundToProgrammer("e_4");
         }
     }
 }

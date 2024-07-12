@@ -55,7 +55,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-6672301369880154341
+--- !u!114 &-6628477004469040352
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,14 +65,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/ProgrammerEvent2
+  m_Name: event:/a_3
   m_EditorClassIdentifier: 
-  Path: event:/ProgrammerEvent2
+  Path: event:/a_3
   Guid:
-    Data1: 2033685138
-    Data2: 1255526169
-    Data3: -1271505257
-    Data4: -1375470104
+    Data1: 1351025706
+    Data2: 1114015955
+    Data3: -1121858149
+    Data4: -1055201527
   Banks:
   - {fileID: 927989793730363730}
   - {fileID: 6365033500065533331}
@@ -82,7 +82,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 24000
+  Length: 2000
 --- !u!114 &-6596739647054611211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +354,6 @@ MonoBehaviour:
   - {fileID: 3101472746958500858}
   - {fileID: -9026311717202838101}
   - {fileID: -2181247565088890107}
-  - {fileID: 1257302635945768529}
   - {fileID: 1835256152244688613}
   - {fileID: 8957619594671386059}
   - {fileID: 1834988916339268855}
@@ -381,14 +380,15 @@ MonoBehaviour:
   - {fileID: 8416054076963776083}
   - {fileID: -7557592273826468939}
   - {fileID: 6784371601312920663}
-  - {fileID: -6672301369880154341}
+  - {fileID: -6628477004469040352}
+  - {fileID: 1528562236997758746}
   EditorParameters:
   - {fileID: 803536765511832395}
   MasterBanks:
   - {fileID: 8890421103761558811}
   StringsBanks:
   - {fileID: 9002635945980516409}
-  cacheTime: 638563226862652163
+  cacheTime: 638563870261133387
   cacheVersion: 131618
 --- !u!114 &803536765511832395
 MonoBehaviour:
@@ -431,39 +431,11 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Test.bank
   Name: Test
   StudioPath: bank:/Test
-  lastModified: 638563054793822060
+  lastModified: 638563864995961730
   FileSizes:
   - Name: Desktop
-    Value: 507776
+    Value: 1494816
   Exists: 1
---- !u!114 &1257302635945768529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/ProgrammerEvent
-  m_EditorClassIdentifier: 
-  Path: event:/ProgrammerEvent
-  Guid:
-    Data1: 1351025706
-    Data2: 1114015955
-    Data3: -1121858149
-    Data4: -1055201527
-  Banks:
-  - {fileID: 927989793730363730}
-  - {fileID: 6365033500065533331}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2000
 --- !u!114 &1460696906382459628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,6 +463,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1528562236997758746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/c_3
+  m_EditorClassIdentifier: 
+  Path: event:/c_3
+  Guid:
+    Data1: 2033685138
+    Data2: 1255526169
+    Data3: -1271505257
+    Data4: -1375470104
+  Banks:
+  - {fileID: 927989793730363730}
+  - {fileID: 6365033500065533331}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 24000
 --- !u!114 &1747823273198640337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,10 +752,10 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638563226861587126
+  lastModified: 638563870259266129
   FileSizes:
   - Name: Desktop
-    Value: 873824
+    Value: 1860864
   Exists: 1
 --- !u!114 &6784371601312920663
 MonoBehaviour:
@@ -936,10 +936,10 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Notes.bank
   Name: Notes
   StudioPath: bank:/Notes
-  lastModified: 638563226862652163
+  lastModified: 638563870261133387
   FileSizes:
   - Name: Desktop
-    Value: 209472
+    Value: 209600
   Exists: 1
 --- !u!114 &8416054076963776083
 MonoBehaviour:
@@ -983,7 +983,7 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638563054792752560
+  lastModified: 638563864994734566
   FileSizes:
   - Name: Desktop
     Value: 63936
@@ -1058,10 +1058,10 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638563054792772566
+  lastModified: 638563864994759566
   FileSizes:
   - Name: Desktop
-    Value: 2796
+    Value: 2776
   Exists: 1
 --- !u!114 &9004128527806109466
 MonoBehaviour:
