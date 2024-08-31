@@ -10,29 +10,30 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    //public FMODUnity.EventReference EventName;
-
-    private EventInstance CurrentMusicInstance;
-    public EventReference TestEventReference;
+    public EventInstance CurrentMusicInstance { get; private set; }
+    public EventReference FirstLevelMusic;
+    public Dictionary<string, bool> Notes = new();
 
     //- Programmer Variables
     private EVENT_CALLBACK BackgroundMusicCallback;
     private Dictionary<string, EventInstance> LoadedInstances = new();
+    GCHandle StringHandle;
 
 
     protected override void Start()
     {
         base.Start();
 
-        //- Initialize Background Music
-        BackgroundMusicCallback = BackgroundMusicEventCallback;
-        InitializeMusic(TestEventReference, "d_4");
+        //- Create Callback so it doesnt get cleand up by GC
+        BackgroundMusicCallback = new FMOD.Studio.EVENT_CALLBACK(BackgroundMusicEventCallback);
 
+        //- Initialize Background Music
+        InitializeMusic(FirstLevelMusic, "d_4");
     }
 
     public void PlayDialogue(string key)
     {
-        // When we want to play, we'll just find the event instance again and start it.
+        //- When we want to play, we'll just find the event instance again and start it.
         var inst = LoadedInstances[key];
         inst.start();
     }
@@ -43,36 +44,31 @@ public class AudioManager : Singleton<AudioManager>
     private void InitializeMusic(EventReference music_reference, string key)
     {
         CurrentMusicInstance = RuntimeManager.CreateInstance(music_reference);
-        GCHandle stringHandle = GCHandle.Alloc(key, GCHandleType.Pinned);
-        CurrentMusicInstance.setUserData(GCHandle.ToIntPtr(stringHandle));
+        StringHandle = GCHandle.Alloc(key, GCHandleType.Pinned);
+        CurrentMusicInstance.setUserData(GCHandle.ToIntPtr(StringHandle));
         CurrentMusicInstance.setCallback(BackgroundMusicCallback);
         CurrentMusicInstance.start();
         CurrentMusicInstance.release();
     }
+    private void InitializeDictionary()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            //ToDo
+        }
+    }
 
     #region Programmer Event Functions
-    public void AssignSoundToProgrammer(string key)
+
+    public void AssignSoundToInstanceWithCallback(EventInstance instance, string key)
     {
-        GCHandle stringHandle = GCHandle.Alloc(key, GCHandleType.Pinned);
-        CurrentMusicInstance.setUserData(GCHandle.ToIntPtr(stringHandle));
-    }
-    public void AssignSoundToProgrammer(EventReference reference, string key)
-    {
-        EventInstance instance = RuntimeManager.CreateInstance(reference);
-        GCHandle stringHandle2 = GCHandle.Alloc(key, GCHandleType.Pinned);
-        instance.setUserData(GCHandle.ToIntPtr(stringHandle2));
-        instance.setCallback(BackgroundMusicCallback);
+        StringHandle = GCHandle.Alloc(key, GCHandleType.Pinned);
+        instance.setUserData(GCHandle.ToIntPtr(StringHandle));
     }    
 
     [AOT.MonoPInvokeCallback(typeof(FMOD.Studio.EVENT_CALLBACK))]
     private static FMOD.RESULT BackgroundMusicEventCallback(EVENT_CALLBACK_TYPE type, IntPtr instancePtr, IntPtr parameterPtr)
     {
-        FMOD.Studio.EventInstance instance = new FMOD.Studio.EventInstance(instancePtr);
-        instance.getUserData(out IntPtr stringPtr);
-
-        GCHandle stringHandle = GCHandle.FromIntPtr(stringPtr);
-        String key = stringHandle.Target as String;
-
         switch (type)
         {
 
@@ -83,33 +79,35 @@ public class AudioManager : Singleton<AudioManager>
                         (FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES)Marshal.PtrToStructure(parameterPtr,
                                                         typeof(FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES));
 
-                    AudioManager.Instance.AssignSoundToProgrammer(Helper.ConvertUtf8ToUtf16(parameter.name));
-
-                    if (key.Contains("."))
+                    string new_key = Helper.ConvertUtf8ToUtf16(parameter.name);
+                    if (new_key.Contains('d'))
                     {
-                        FMOD.RESULT soundResult = RuntimeManager.CoreSystem.createSound(Application.streamingAssetsPath + "/" + key, soundMode, out FMOD.Sound uiSound);
-                        if (soundResult == FMOD.RESULT.OK)
-                        {
-                            parameter.sound = uiSound.handle;
-                            parameter.subsoundIndex = -1;
-                            Marshal.StructureToPtr(parameter, parameterPtr, false);
-                        }
+                        break;
+                    }
+                    if (Instance == null)
+                    {
+                        UnityEngine.Debug.Log("Instance ist null");
+                    }
+                    else if (new_key == null)
+                    {
+                        UnityEngine.Debug.Log("Key ist null lol");
                     }
                     else
                     {
-                        FMOD.RESULT keyResult = RuntimeManager.StudioSystem.getSoundInfo(key, out FMOD.Studio.SOUND_INFO uiSoundInfo);
-                        if (keyResult != FMOD.RESULT.OK)
-                        {
-                            break;
-                        }
+                        //Instance.AssignSoundToInstanceWithCallback(Instance.CurrentMusicInstance, new_key);
+                    }
+                    FMOD.RESULT keyResult = RuntimeManager.StudioSystem.getSoundInfo(new_key, out FMOD.Studio.SOUND_INFO uiSoundInfo);
+                    if (keyResult != FMOD.RESULT.OK)
+                    {
+                        break;
+                    }
 
-                        FMOD.RESULT soundResult = RuntimeManager.CoreSystem.createSound(uiSoundInfo.name_or_data, soundMode | uiSoundInfo.mode, ref uiSoundInfo.exinfo, out FMOD.Sound uiSound);
-                        if (soundResult == FMOD.RESULT.OK)
-                        {
-                            parameter.sound = uiSound.handle;
-                            parameter.subsoundIndex = uiSoundInfo.subsoundindex;
-                            Marshal.StructureToPtr(parameter, parameterPtr, false);
-                        }
+                    FMOD.RESULT soundResult = RuntimeManager.CoreSystem.createSound(uiSoundInfo.name_or_data, soundMode | uiSoundInfo.mode, ref uiSoundInfo.exinfo, out FMOD.Sound uiSound);
+                    if (soundResult == FMOD.RESULT.OK)
+                    {
+                        parameter.sound = uiSound.handle;
+                        parameter.subsoundIndex = uiSoundInfo.subsoundindex;
+                        Marshal.StructureToPtr(parameter, parameterPtr, false);
                     }
                     break;
                 }
@@ -122,34 +120,36 @@ public class AudioManager : Singleton<AudioManager>
                     sound.release();
                     break;
                 }
-            case FMOD.Studio.EVENT_CALLBACK_TYPE.DESTROYED:
-                {
-                    stringHandle.Free();
-                    break;
-                }
         }
         return FMOD.RESULT.OK;
     }
-
-//#if UNITY_EDITOR
-//    void Reset()
-//    {
-//        EventName = FMODUnity.EventReference.Find("event:/ProgrammerEvent");
-//    }
-//#endif
-
     #endregion
+    private void OnDestroy()
+    {
+        var result = CurrentMusicInstance.setUserData(IntPtr.Zero);
+        if (result != RESULT.OK)
+        {
+            UnityEngine.Debug.LogError(result.ToString());
+        }
+        result = CurrentMusicInstance.setCallback(null);
+        if (result != RESULT.OK)
+        {
+            UnityEngine.Debug.LogError(result.ToString());
+        }
 
+        if (StringHandle.IsAllocated)
+            StringHandle.Free();
+    }
     protected override void Update()
     {
         base.Update();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AssignSoundToProgrammer("a_4");
+            //AssignSoundToProgrammer("a_4");
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            AssignSoundToProgrammer("e_4");
+            //AssignSoundToProgrammer("e_4");
         }
     }
 }

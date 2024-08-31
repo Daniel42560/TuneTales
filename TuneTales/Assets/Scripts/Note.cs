@@ -7,13 +7,12 @@ public class Note
 {
     public  NoteSymbol Symbol;
     public int Octave;
-    public AudioClip[] Clip;
+    public bool Mute;
 
-    public Note(NoteSymbol symbol, int octave, AudioClip[] sounds)
+    public Note(NoteSymbol symbol, int octave)
     {
         Symbol = symbol;
-        Octave = octave;
-        Clip = sounds;        
+        Octave = octave;  
     }
 }
 public enum NoteSymbol

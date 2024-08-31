@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 35740938}
   - component: {fileID: 35740939}
-  - component: {fileID: 35740940}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -170,32 +169,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894b62e8dd018e84b8508553eb36b187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestEventReference:
+  FirstLevelMusic:
     Guid:
-      Data1: 1351025706
-      Data2: 1114015955
-      Data3: -1121858149
-      Data4: -1055201527
-    Path: event:/ProgrammerEvent
---- !u!114 &35740940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35740937}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 418d0eb5e14227e48b081829f8acde55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiProgrammerSoundEvent:
-    Guid:
-      Data1: 1351025706
-      Data2: 1114015955
-      Data3: -1121858149
-      Data4: -1055201527
-    Path: event:/ProgrammerEvent
+      Data1: -189539939
+      Data2: 1325399585
+      Data3: 1906898816
+      Data4: -630390586
+    Path: event:/Music/Level1/Song1
 --- !u!1 &368563536
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +315,8 @@ GameObject:
   - component: {fileID: 437234599}
   - component: {fileID: 437234598}
   - component: {fileID: 437234597}
+  - component: {fileID: 437234600}
+  - component: {fileID: 437234601}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -447,6 +429,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &437234600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437234595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630d1134609f64a4d92dff01bd7b9581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &437234601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437234595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Projectile
+  Parameter: TestParameter
+  TriggerEvent: 3
+  Value: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
