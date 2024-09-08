@@ -19,8 +19,8 @@ MonoBehaviour:
     Data3: -249647481
     Data4: 2055183966
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -102,8 +102,8 @@ MonoBehaviour:
     Data3: -1087750742
     Data4: 453796070
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 8890421103761558811}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -238,8 +238,8 @@ MonoBehaviour:
     Data3: -2010990154
     Data4: -1441576969
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -346,8 +346,8 @@ MonoBehaviour:
     Data3: -728006741
     Data4: 1914199098
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -414,7 +414,7 @@ MonoBehaviour:
   - {fileID: 8890421103761558811}
   StringsBanks:
   - {fileID: 9002635945980516409}
-  cacheTime: 638565579869189654
+  cacheTime: 638614329098511646
   cacheVersion: 131618
 --- !u!114 &803536765511832395
 MonoBehaviour:
@@ -457,10 +457,10 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Test.bank
   Name: Test
   StudioPath: bank:/Test
-  lastModified: 638563864995961730
+  lastModified: 638614320124629988
   FileSizes:
   - Name: Desktop
-    Value: 1494816
+    Value: 1495040
   Exists: 1
 --- !u!114 &1460696906382459628
 MonoBehaviour:
@@ -536,8 +536,8 @@ MonoBehaviour:
     Data3: 1402360466
     Data4: -1354336832
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -592,12 +592,13 @@ MonoBehaviour:
     Data3: -2042293832
     Data4: 2037715102
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 7984254491670445300}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -620,8 +621,8 @@ MonoBehaviour:
     Data3: -96143427
     Data4: 960615380
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -779,10 +780,10 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638565579869189654
+  lastModified: 638614329098111279
   FileSizes:
   - Name: Desktop
-    Value: 1861440
+    Value: 1865696
   Exists: 1
 --- !u!114 &6784371601312920663
 MonoBehaviour:
@@ -884,8 +885,8 @@ MonoBehaviour:
     Data3: 437464961
     Data4: -205755916
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -939,8 +940,8 @@ MonoBehaviour:
     Data3: 900499122
     Data4: -215957491
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -963,10 +964,36 @@ MonoBehaviour:
   Path: ../../../FMOD/TuneTalesFMOD/Build/Desktop/Notes.bank
   Name: Notes
   StudioPath: bank:/Notes
-  lastModified: 638563870261133387
+  lastModified: 638614329098511646
   FileSizes:
   - Name: Desktop
-    Value: 209600
+    Value: 209888
+  Exists: 1
+--- !u!114 &7984254491670445300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/d_4_piano_programmer/TestParameter
+  m_EditorClassIdentifier: 
+  Name: TestParameter
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 704319929
+    data2: 457136154
+  Type: 2
+  IsGlobal: 1
+  Labels:
+  - Value A
+  - Value B
   Exists: 1
 --- !u!114 &8416054076963776083
 MonoBehaviour:
@@ -1061,8 +1088,8 @@ MonoBehaviour:
     Data3: -1620024940
     Data4: 1731814784
   Banks:
-  - {fileID: 7834822988703012102}
   - {fileID: 6365033500065533331}
+  - {fileID: 7834822988703012102}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1

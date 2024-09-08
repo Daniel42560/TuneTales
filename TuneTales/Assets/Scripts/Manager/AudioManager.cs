@@ -12,6 +12,7 @@ public class AudioManager : Singleton<AudioManager>
 {
     public EventInstance CurrentMusicInstance { get; private set; }
     public EventReference FirstLevelMusic;
+    //- Dictonary that handles if Notes should be played or not
     public Dictionary<string, bool> Notes = new();
 
     //- Programmer Variables
@@ -19,6 +20,9 @@ public class AudioManager : Singleton<AudioManager>
     private Dictionary<string, EventInstance> LoadedInstances = new();
     GCHandle StringHandle;
 
+    //- Rest
+    private int StartOctave = 2;
+    private int EndOctave = 4;
 
     protected override void Start()
     {
@@ -27,7 +31,8 @@ public class AudioManager : Singleton<AudioManager>
         //- Create Callback so it doesnt get cleand up by GC
         BackgroundMusicCallback = new FMOD.Studio.EVENT_CALLBACK(BackgroundMusicEventCallback);
 
-        //- Initialize Background Music
+        //- Initialize Background Music and Dictonary
+        InitializeDictionary();
         InitializeMusic(FirstLevelMusic, "d_4");
     }
 
@@ -52,10 +57,28 @@ public class AudioManager : Singleton<AudioManager>
     }
     private void InitializeDictionary()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < Enum.GetValues(typeof(Instrument)).Length; i++)
         {
-            //ToDo
+            for (int j = 0; j < Enum.GetValues(typeof(NoteSymbol)).Length; j++)
+            {
+                for (int k = StartOctave; k <= EndOctave; k++)
+                {
+                    string input = "";
+                    input += ((NoteSymbol)j).ToString().ToLower();
+                    input += "_";
+                    input += k.ToString();
+                    input += "_";
+                    input += ((Instrument)i).ToString().ToLower();
+                    Notes.Add(input, false);
+                }
+            }
         }
+    }
+    public void SetNote(string name, bool value)
+    {
+        if (!Notes.ContainsKey(name))
+            return;
+        Notes[name] = value;
     }
 
     #region Programmer Event Functions
@@ -80,21 +103,17 @@ public class AudioManager : Singleton<AudioManager>
                                                         typeof(FMOD.Studio.PROGRAMMER_SOUND_PROPERTIES));
 
                     string new_key = Helper.ConvertUtf8ToUtf16(parameter.name);
-                    if (new_key.Contains('d'))
-                    {
+                    //- Break if key is not in Dictonary or shouldnt be played
+                    if (!Instance.Notes.ContainsKey(new_key) || !Instance.Notes[new_key])
                         break;
-                    }
+
                     if (Instance == null)
-                    {
                         UnityEngine.Debug.Log("Instance ist null");
-                    }
                     else if (new_key == null)
-                    {
                         UnityEngine.Debug.Log("Key ist null lol");
-                    }
                     else
                     {
-                        //Instance.AssignSoundToInstanceWithCallback(Instance.CurrentMusicInstance, new_key);
+                        Instance.AssignSoundToInstanceWithCallback(Instance.CurrentMusicInstance, new_key);
                     }
                     FMOD.RESULT keyResult = RuntimeManager.StudioSystem.getSoundInfo(new_key, out FMOD.Studio.SOUND_INFO uiSoundInfo);
                     if (keyResult != FMOD.RESULT.OK)

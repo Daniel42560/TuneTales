@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Collider : MonoBehaviour
 {
+    [SerializeField]
+    private string ActivatedNote;
     private void Start()
     {
 
@@ -12,7 +14,7 @@ public class Collider : MonoBehaviour
     {
         if (collision.tag == "Projectile")
         {
-
+            AudioManager.Instance.SetNote(ActivatedNote, true);
         }
     }
 }

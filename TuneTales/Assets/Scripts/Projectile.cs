@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
         RigBody.velocity = move_direction * MoveSpeed;
 
         //- Sound
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.c_4_piano, transform.position);
+        //AudioManager.Instance.PlayOneShot(FMODEvents.Instance.c_4_piano, transform.position);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
